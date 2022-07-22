@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface TestObject
+class ChildObjectOne implements TestObject
+class ChildObjectTwo implements TestObject
+class client
+
+interface TestObjectMethodFactory
+class ChildObjectOneFactory implements TestObjectMethodFactory
+class ChildObjectTwoFactory implements TestObjectMethodFactory
+
+
+
+namespace producer {
+    TestObject <|-- ChildObjectOne
+    TestObject <|-- ChildObjectTwo
+
+    ChildObjectOne <|-- Factory.ChildObjectOneFactory
+    ChildObjectTwo <|-- Factory.ChildObjectTwoFactory
+
+
+    TestObject : run()
+    ChildObjectOne : run()
+    ChildObjectTwo : run()
+}
+
+namespace Factory {
+    TestObjectMethodFactory <|-- ChildObjectOneFactory
+    TestObjectMethodFactory <|-- ChildObjectTwoFactory
+}
+
+client <|-- Factory.ChildObjectOneFactory
+client <|-- Factory.ChildObjectTwoFactory
+
+
+
+
+@enduml
